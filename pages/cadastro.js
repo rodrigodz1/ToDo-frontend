@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../api/config'
 import Router, { withRouter } from 'next/router'
 import { Form } from '../styles/Styled'
 
@@ -14,7 +15,7 @@ export default function Cadastro() {
 
         if (temp) {
 
-            axios.post("http://localhost:3333/auth/verify", {
+            api.post("/auth/verify", {
                 accesstoken: temp
             }).then(function (response) {
                 Router.push({ pathname: '/dashboard' })
@@ -32,7 +33,7 @@ export default function Cadastro() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        axios.post("http://localhost:3333/auth/register", {
+        api.post("/auth/register", {
             name: name,
             email: email,
             password: password

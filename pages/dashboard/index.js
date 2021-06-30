@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
 import Router, { withRouter } from 'next/router'
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../../api/config'
 import { ULdeTasks } from '../../styles/Styled'
 
 export default function Dashboard() {
@@ -17,7 +18,7 @@ export default function Dashboard() {
 
         if (temp) {
 
-            axios.post("http://localhost:3333/auth/verify", {
+            api.post("/auth/verify", {
                 accesstoken: temp
             }).then(function (response) {
                 setUserObj(response.data.user)
@@ -27,7 +28,7 @@ export default function Dashboard() {
                 Router.push({ pathname: '/' })
             })
 
-            axios.get("http://localhost:3333/task", {
+            api.get("/task", {
                 headers: {
                     'accesstoken': temp
                 }
@@ -53,7 +54,7 @@ export default function Dashboard() {
     }
 
     function RemoverTask(id) {
-        axios.delete(`http://localhost:3333/task/${id}`, {
+        api.delete(`/task/${id}`, {
             headers: {
                 'accesstoken': localStorage.getItem("accesstoken")
             }
