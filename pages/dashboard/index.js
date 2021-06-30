@@ -22,6 +22,8 @@ export default function Dashboard() {
                 setUserObj(response.data.user)
             }).catch(function (error) {
                 console.log("Erro: " + error);
+                localStorage.removeItem("accesstoken")
+                Router.push({ pathname: '/' })
             })
 
         } else {

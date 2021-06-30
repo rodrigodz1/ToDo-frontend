@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Router, { withRouter } from 'next/router'
+import { Form } from '../styles/Styled'
 
 export default function Cadastro() {
 
@@ -19,10 +20,11 @@ export default function Cadastro() {
                 Router.push({ pathname: '/dashboard' })
             }).catch(function (error) {
                 console.log("Erro: " + error);
+                localStorage.removeItem("accesstoken")
+                Router.push({ pathname: '/' })
             })
 
         } else {
-            Router.push({ pathname: '/' })
         }
 
     }, [])
@@ -45,7 +47,7 @@ export default function Cadastro() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <label>
                     Nome:
                     <input
@@ -70,8 +72,10 @@ export default function Cadastro() {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </label>
-                <input type="submit" value="Cadastrar" />
-            </form>
+                <label>
+                    <input type="submit" value="Cadastrar" />
+                </label>
+            </Form>
         </div>
     )
 }
