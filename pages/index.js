@@ -27,18 +27,22 @@ export default function Home() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    axios.post("http://localhost:3333/auth/login", {
-      email: email,
-      password: password
-    })
-      .then(function (response) {
-        localStorage.setItem('accesstoken', response.data.accesstoken)
-        Router.push({ pathname: '/dashboard' })
-      }).catch(function (error) {
-        console.log("Erro: " + error);
-        setDadosIncorretos(true)
+    if (email !== "" && password !== "") {
+      axios.post("http://localhost:3333/auth/login", {
+        email: email,
+        password: password
       })
-
+        .then(function (response) {
+          localStorage.setItem('accesstoken', response.data.accesstoken)
+          Router.push({ pathname: '/dashboard' })
+        }).catch(function (error) {
+          console.log("Erro: " + error);
+          setDadosIncorretos(true)
+        })
+    } else {
+      console.log("Email ou senha vazios");
+      setDadosIncorretos(true)
+    }
 
   }
 
