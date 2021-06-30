@@ -18,6 +18,5 @@
   "devDependencies": {
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1"
-  },
-  "proxy": "http://localhost:3333"
+  }
 }
