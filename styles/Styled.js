@@ -39,4 +39,17 @@ export const Form = styled.form`
 
 `
 
+export const ULdeTasks = styled.ul`
+    border-style: ridge;
+    list-style-type: none;
+    p {
+        text-align: center;
+    };
+    li {
+        span {
+            margin-right: 50px;
+        }
+    }
+`
+
 
