@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import axios from 'axios';
-import api from '../api/config'
+import axios from 'axios';
 import Router, { withRouter } from 'next/router'
 import { Form } from '../styles/Styled'
 
@@ -15,7 +14,7 @@ export default function Cadastro() {
 
         if (temp) {
 
-            api.post("/auth/verify", {
+            axios.post("https://trabseg-api.herokuapp.com/auth/verify", {
                 accesstoken: temp
             }).then(function (response) {
                 Router.push({ pathname: '/dashboard' })
@@ -33,7 +32,7 @@ export default function Cadastro() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        api.post("/auth/register", {
+        axios.post("https://trabseg-api.herokuapp.com/auth/register", {
             name: name,
             email: email,
             password: password

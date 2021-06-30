@@ -2,9 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react';
 import Router, { withRouter } from 'next/router'
-//import axios from 'axios';
-import api from '../api/config'
-
+import axios from 'axios';
 import { MainContainer, LoginButton, CadastroButton, ErrorMsg, Form } from '../styles/Styled'
 
 export default function Home() {
@@ -30,7 +28,7 @@ export default function Home() {
     evt.preventDefault();
 
     if (email !== "" && password !== "") {
-      api.post("/auth/login", {
+      axios.post("https://trabseg-api.herokuapp.com/auth/login", {
         email: email,
         password: password
       })

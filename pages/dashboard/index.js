@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
 import Router, { withRouter } from 'next/router'
-//import axios from 'axios';
-import api from '../../api/config'
+import axios from 'axios';
 import { ULdeTasks } from '../../styles/Styled'
 
 export default function Dashboard() {
@@ -18,7 +17,7 @@ export default function Dashboard() {
 
         if (temp) {
 
-            api.post("/auth/verify", {
+            axios.post("https://trabseg-api.herokuapp.com/auth/verify", {
                 accesstoken: temp
             }).then(function (response) {
                 setUserObj(response.data.user)
@@ -28,7 +27,7 @@ export default function Dashboard() {
                 Router.push({ pathname: '/' })
             })
 
-            api.get("/task", {
+            axios.get("https://trabseg-api.herokuapp.com/task", {
                 headers: {
                     'accesstoken': temp
                 }
@@ -54,7 +53,7 @@ export default function Dashboard() {
     }
 
     function RemoverTask(id) {
-        api.delete(`/task/${id}`, {
+        axios.delete(`https://trabseg-api.herokuapp.com/task/${id}`, {
             headers: {
                 'accesstoken': localStorage.getItem("accesstoken")
             }
