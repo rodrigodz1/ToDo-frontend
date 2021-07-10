@@ -12,12 +12,10 @@ export default function Dashboard() {
     const [userTasks, setUserTasks] = useState([])
 
     const [profile, setProfile] = useState(false)
-    const [mostrarTasks, setMostrarTasks] = useState(false)
 
     const [taskName, setTaskName] = useState("")
     const [taskDescription, setTaskDescription] = useState("")
     const [adicionarTask, setAdicionarTask] = useState(false)
-    const [editarTask, setEditarTask] = useState([])
 
     useEffect(() => {
         let temp = localStorage.getItem("accesstoken")
@@ -80,28 +78,6 @@ export default function Dashboard() {
 
     }
 
-    const handleEditarTask = id => {
-        let token = localStorage.getItem("accesstoken")
-
-        let task = {
-            name: taskName,
-            description: taskDescription
-        }
-
-        axios.put(`${localAPI}/task/${id}`, task, {
-            headers: {
-                'accesstoken': token
-            }
-            //headers always last argument
-
-        }).then(function (response) {
-            console.log(response.data);
-            document.location.reload(true);
-        }).catch(function (error) {
-            console.log("Erro: " + error);
-        })
-    }
-
     function RemoverTask(id) {
         axios.delete(`${localAPI}/task/${id}`, {
             headers: {
@@ -113,6 +89,52 @@ export default function Dashboard() {
         }).catch(function (error) {
             console.log("Erro: " + error);
         })
+    }
+
+    function manageUsers(){
+        let temp = localStorage.getItem("accesstoken")
+
+        axios.post(`${localAPI}/auth/verify`, {
+            accesstoken: temp
+        }).then(function (response) {
+            //token valido...
+            if (userObj.id !== response.data.user.id){
+                console.log("IDs da sessão atual e id do token não correspondem.");
+                localStorage.removeItem("accesstoken")
+                Router.push({ pathname: '/' })
+            } else {
+                Router.push({ pathname: '/manageusers' })
+            }
+
+        }).catch(function (error) {
+            console.log("Erro: " + error);
+            localStorage.removeItem("accesstoken")
+            Router.push({ pathname: '/' })
+        })
+
+    }
+
+    function manageTasks(){
+        let temp = localStorage.getItem("accesstoken")
+
+        axios.post(`${localAPI}/auth/verify`, {
+            accesstoken: temp
+        }).then(function (response) {
+            //token valido...
+            if (userObj.id !== response.data.user.id){
+                console.log("IDs da sessão atual e id do token não correspondem.");
+                localStorage.removeItem("accesstoken")
+                Router.push({ pathname: '/' })
+            } else {
+                Router.push({ pathname: '/dashboard/managetasks' })
+            }
+
+        }).catch(function (error) {
+            console.log("Erro: " + error);
+            localStorage.removeItem("accesstoken")
+            Router.push({ pathname: '/' })
+        })
+
     }
 
     return (
@@ -165,15 +187,22 @@ export default function Dashboard() {
                     }
                 </ULdeTasks>
                 <main>
-                    <button onClick={() => setProfile(!profile)} >Gerenciar Perfil</button>
+                    <button onClick={() => setProfile(!profile)} >Gerenciar meu Perfil</button>
                     {profile ? <div>
                         Meu e-mail: {userObj.email ? userObj.email : null}
                         <button>Mudar senha</button>
                     </div> : null}
-                    <button onClick={() => setMostrarTasks(!mostrarTasks)}>Gerenciar minhas Tarefas</button>
-                    {mostrarTasks ? <div>
-                        Adicionar altas tasks aqui
-                    </div> : null}
+
+                    { userObj.is_superuser ?
+
+                    <div>
+                        Painel de Administrador
+                        <button onClick={() => manageUsers()}>Gerenciar Usuários</button>
+                        <button onClick={() => manageTasks()}>Visualizar todas as tarefas</button>
+                    </div>
+
+                    : null }
+                    
                 </main>
                 <footer>
 
