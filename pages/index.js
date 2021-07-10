@@ -62,21 +62,22 @@ export default function Home() {
         <p>Trabalho de Segurança em Sistemas</p>
         <p>ToDo App</p>
         <Form onSubmit={handleSubmit}>
-          E-mail
+          
           <label>
-            <input
+          
+          E-mail :<input
               type="email"
               value={email}
-              placeholder="insira o e-mail cadastrado"
+              placeholder="Insira seu e-mail"
               onChange={e => setEmail(e.target.value)}
             />
           </label>
-          Senha
+          
           <label>
-            <input
+          Senha :<input
               type="password"
               value={password}
-              placeholder="insira a senha cadastrado"
+              placeholder="Insira sua senha"
               onChange={e => setPassword(e.target.value)}
             />
           </label>

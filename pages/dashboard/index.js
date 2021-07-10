@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
 import Router, { withRouter } from 'next/router'
 import axios from 'axios';
-import { ULdeTasks, NavTopBar } from '../../styles/Styled'
+import { ULdeTasks, NavTopBar, AdminPanel } from '../../styles/Styled'
 let localAPI = process.env.localAPI
 //let remoteAPI= "https://trabseg-api.herokuapp.com"
 
@@ -103,7 +103,7 @@ export default function Dashboard() {
                 localStorage.removeItem("accesstoken")
                 Router.push({ pathname: '/' })
             } else {
-                Router.push({ pathname: '/manageusers' })
+                Router.push({ pathname: '/dashboard/manageusers' })
             }
 
         }).catch(function (error) {
@@ -145,7 +145,7 @@ export default function Dashboard() {
                 </Head>
 
                 <NavTopBar>
-                <h2>Bem vindo, {userObj.name ? userObj.name : null}! 
+                <h2>Olá, {userObj.name ? userObj.name : null}! 
                 {userObj.is_superuser ? <a> Logado como administrador</a> : null }
                 </h2>
                  <button onClick={() => Logout()}>Logout</button>
@@ -187,23 +187,28 @@ export default function Dashboard() {
                     }
                 </ULdeTasks>
                 <main>
-                    <button onClick={() => setProfile(!profile)} >Gerenciar meu Perfil</button>
+                    <button onClick={() => setProfile(!profile)} >Ver meu e-mail</button>
                     {profile ? <div>
-                        Meu e-mail: {userObj.email ? userObj.email : null}
-                        <button>Mudar senha</button>
+                        {userObj.email ? userObj.email : null}
                     </div> : null}
 
-                    { userObj.is_superuser ?
-
-                    <div>
-                        Painel de Administrador
-                        <button onClick={() => manageUsers()}>Gerenciar Usuários</button>
-                        <button onClick={() => manageTasks()}>Visualizar todas as tarefas</button>
-                    </div>
-
-                    : null }
+                    
                     
                 </main>
+                { userObj.is_superuser ?
+
+                    <AdminPanel>
+                        <h2>
+                            <p>Painel de Administrador</p>
+                            <section>
+                                <button onClick={() => manageUsers()}>Gerenciar Usuários</button>
+                                <button onClick={() => manageTasks()}>Visualizar todas as tarefas</button>
+                            </section>
+                                
+                        </h2>
+                    </AdminPanel>
+
+                : null }
                 <footer>
 
                 </footer>

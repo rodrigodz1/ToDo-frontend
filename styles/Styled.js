@@ -61,3 +61,20 @@ export const NavTopBar = styled.nav`
     }
 `
 
+export const AdminPanel = styled.section`
+
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+    text-align: center;
+    h2 {
+        display: flex;
+        flex-direction: column;
+    };
+    button {
+        color: red;
+        background-color: black;
+        padding: 5px;
+        margin: 5px;
+    }
+`
