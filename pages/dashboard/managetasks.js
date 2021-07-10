@@ -4,7 +4,7 @@ import axios from 'axios';
 
 let localAPI = process.env.localAPI
 
-export default function () {
+export default function ManageTasks() {
 
   const [userObj, setUserObj] = useState("")
   const [userTasks, setUserTasks] = useState([])
