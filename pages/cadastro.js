@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Router, { withRouter } from 'next/router'
 import { Form } from '../styles/Styled'
+let localAPI = process.env.localAPI
+//let remoteAPI= "https://trabseg-api.herokuapp.com"
 
 export default function Cadastro() {
 
@@ -14,7 +16,7 @@ export default function Cadastro() {
 
         if (temp) {
 
-            axios.post("https://trabseg-api.herokuapp.com/auth/verify", {
+            axios.post(`${localAPI}/auth/verify`, {
                 accesstoken: temp
             }).then(function (response) {
                 Router.push({ pathname: '/dashboard' })
@@ -32,7 +34,7 @@ export default function Cadastro() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        axios.post("https://trabseg-api.herokuapp.com/auth/register", {
+        axios.post(`${localAPI}/auth/register`, {
             name: name,
             email: email,
             password: password

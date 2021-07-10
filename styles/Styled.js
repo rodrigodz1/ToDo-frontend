@@ -52,4 +52,12 @@ export const ULdeTasks = styled.ul`
     }
 `
 
+export const NavTopBar = styled.nav`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    a {
+        color: red;
+    }
+`
 

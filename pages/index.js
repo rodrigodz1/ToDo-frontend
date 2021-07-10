@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Router, { withRouter } from 'next/router'
 import axios from 'axios';
 import { MainContainer, LoginButton, CadastroButton, ErrorMsg, Form } from '../styles/Styled'
+let localAPI = process.env.localAPI
+//let remoteAPI= "https://trabseg-api.herokuapp.com"
+console.log(localAPI);
 
 export default function Home() {
 
@@ -28,7 +31,7 @@ export default function Home() {
     evt.preventDefault();
 
     if (email !== "" && password !== "") {
-      axios.post("https://trabseg-api.herokuapp.com/auth/login", {
+      axios.post(`${localAPI}/auth/login`, {
         email: email,
         password: password
       })
