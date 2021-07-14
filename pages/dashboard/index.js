@@ -153,6 +153,16 @@ export default function Dashboard() {
 
                 <ULdeTasks>
                     <p>Minhas tasks</p>
+                    {
+                        userTasks.map((task, indice) => {
+
+                            return <li key={indice}>
+                                <span>{task.name}</span>
+                                <button onClick={() => RemoverTask(task.id)}>Excluir task</button>
+                                
+                            </li>
+                        })
+                    }
                     <button onClick={() => setAdicionarTask(!adicionarTask)}>Adicionar task</button>
                     { adicionarTask ?
 
@@ -173,18 +183,7 @@ export default function Dashboard() {
                         </form>
 
                     : null}
-                    {
-                        userTasks.map((task, indice) => {
-
-                            return <li key={indice}>
-                                <span>{task.name}</span>
-
-                                
-
-                                <button onClick={() => RemoverTask(task.id)}>Excluir task</button>
-                            </li>
-                        })
-                    }
+                    
                 </ULdeTasks>
                 <main>
                     <button onClick={() => setProfile(!profile)} >Ver meu e-mail</button>

@@ -40,17 +40,22 @@ export const Form = styled.form`
 `
 
 export const ULdeTasks = styled.ul`
-    border-style: ridge;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-style: solid;
+    border-color: gray;
     list-style-type: none;
     p {
         text-align: center;
     };
     li {
-        span {
-            margin-right: 50px;
-        }
+    };
+    button {
+        margin: 10px;
     }
 `
+
 
 export const NavTopBar = styled.nav`
     display: flex;

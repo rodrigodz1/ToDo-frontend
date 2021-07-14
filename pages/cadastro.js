@@ -11,6 +11,8 @@ export default function Cadastro() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const [erroCadastro, setErroCadastro] = useState("")
+
     useEffect(() => {
         let temp = localStorage.getItem("accesstoken")
 
@@ -43,6 +45,7 @@ export default function Cadastro() {
                 localStorage.setItem('accesstoken', response.data.accesstoken)
                 Router.push({ pathname: '/dashboard' })
             }).catch(function (error) {
+                setErroCadastro(error.response.data.msg)
                 console.log("Erro: " + error);
             })
     }
@@ -76,6 +79,9 @@ export default function Cadastro() {
                 </label>
                 <label>
                     <input type="submit" value="Cadastrar" />
+                </label>
+                <label>
+                    {erroCadastro}
                 </label>
             </Form>
         </div>
