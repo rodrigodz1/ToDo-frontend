@@ -32,6 +32,3 @@ yarn-error.log*
 
 # vercel
 .vercel
-
-# só pra não mudar a API remota
-/next.config.js
