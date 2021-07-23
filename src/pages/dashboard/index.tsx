@@ -8,7 +8,7 @@ let localAPI = process.env.localAPI
 
 export default function Dashboard() {
 
-    const [userObj, setUserObj] = useState("")
+    const [userObj, setUserObj] = useState(Object)
     const [userTasks, setUserTasks] = useState([])
 
     const [profile, setProfile] = useState(false)
@@ -145,7 +145,7 @@ export default function Dashboard() {
                 </Head>
 
                 <NavTopBar>
-                <h2>Olá, {userObj.name ? userObj.name : null}! 
+                <h2>Olá, {userObj.name ? userObj.name : null}!
                 {userObj.is_superuser ? <a> Logado como administrador</a> : null }
                 </h2>
                  <button onClick={() => Logout()}>Logout</button>
@@ -153,13 +153,15 @@ export default function Dashboard() {
 
                 <ULdeTasks>
                     <p>Minhas tasks</p>
+                    <a>Nome da task</a>
                     {
                         userTasks.map((task, indice) => {
 
                             return <li key={indice}>
-                                <span>{task.name}</span>
-                                <button onClick={() => RemoverTask(task.id)}>Excluir task</button>
-                                
+                              <div>
+                                  <span>{task.name}</span>
+                                    <button onClick={() => RemoverTask(task.id)}>Excluir task</button>
+                                </div>
                             </li>
                         })
                     }
@@ -183,7 +185,7 @@ export default function Dashboard() {
                         </form>
 
                     : null}
-                    
+
                 </ULdeTasks>
                 <main>
                     <button onClick={() => setProfile(!profile)} >Ver meu e-mail</button>
@@ -191,8 +193,8 @@ export default function Dashboard() {
                         {userObj.email ? userObj.email : null}
                     </div> : null}
 
-                    
-                    
+
+
                 </main>
                 { userObj.is_superuser ?
 
@@ -202,9 +204,9 @@ export default function Dashboard() {
                             <section>
                                 <button onClick={() => manageUsers()}>Gerenciar Usuários</button>
                                 <button onClick={() => manageTasks()}>Visualizar todas as tarefas</button>
-                            </section>
-                                
-                        </h2>
+                           </section>
+
+                                                        </h2>
                     </AdminPanel>
 
                 : null }

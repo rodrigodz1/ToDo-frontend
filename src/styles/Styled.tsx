@@ -31,7 +31,7 @@ export const Form = styled.form`
     span {
         display: flex;
         justify-content: center;
-        
+
         button {
             margin-left: 4px
         }
@@ -53,7 +53,15 @@ export const ULdeTasks = styled.ul`
     };
     button {
         margin: 10px;
-    }
+    };
+    div {
+      display: grid;
+      grid-template-columns: 400px 400px;
+      align-items: center;
+      button {
+        width: 200px;
+      }
+    };
 `
 
 
