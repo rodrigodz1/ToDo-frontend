@@ -153,7 +153,6 @@ export default function Dashboard() {
 
                 <ULdeTasks>
                     <p>Minhas tasks</p>
-                    <a>Nome da task</a>
                     {
                         userTasks.map((task, indice) => {
 
